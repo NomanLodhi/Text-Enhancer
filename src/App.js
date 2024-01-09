@@ -6,7 +6,8 @@ import Field from './Field';
 import About from './About';
 import Alert from './Alert';
 import { useState } from 'react';
-
+import { BrowserRouter } from 'react-router-dom';
+import { Route,Routes } from 'react-router-dom';
 function App() {
   const [mode,setdarkMode]=useState('light');
   const [textChange,settextChange]=useState('dark');
@@ -48,12 +49,19 @@ else{
 
 return (
   <>
-
+<BrowserRouter>
 <Navbar Name={"TextEnhancer"} mode={mode} toggleMode={toggleMode} textChange={textChange} Ld={lD} />
 <Alert message={alert} dAlert={dAlert} BgAlert={BgAlert} icon={icon} />
-<Field Placeholder={"Edit your text here"} Preview={"Preview your text : "} textChange={textChange} mode={mode}/>
+<Routes>
+<Route index element={<Field Placeholder={"Edit your text here"} Preview={"Preview your text : "} textChange={textChange} mode={mode}/>}/>
 
-<About mode={mode}/>
+
+<Route exact path='/About' element={<About mode={mode}/> }/>
+</Routes>
+</BrowserRouter>
+
+
+
 
 
 </>
